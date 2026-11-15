@@ -1,0 +1,33 @@
+# Apache / cPanel hostingler için ayarlar. Başka sunucularda bu dosya yok sayılır.
+
+# Bulunamayan sayfalar için özel 404 sayfası
+ErrorDocument 404 /404.html
+
+# HTTPS'e yönlendirme — hostinginizde SSL sertifikası aktifse aşağıdaki 3 satırın başındaki # işaretini kaldırın.
+# (Cloudflare "Flexible SSL" kullanıyorsanız açmayın; yönlendirme döngüsü oluşur.)
+# RewriteEngine On
+# RewriteCond %{HTTPS} !=on
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Sıkıştırma (daha hızlı açılış)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json image/svg+xml application/xml
+</IfModule>
+
+# Tarayıcı önbelleği: sürüm adlı dosyalar 1 yıl, görseller 30 gün, HTML her seferinde kontrol
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+AddType font/woff2 .woff2
+AddType image/webp .webp
