@@ -5,7 +5,8 @@ import MotionProvider from "@/components/ui/MotionProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFab from "@/components/WhatsAppFab";
-import { site } from "@/data/site";
+import { site, mapsLink } from "@/data/site";
+import { services } from "@/data/services";
 
 const archivo = Archivo({
   subsets: ["latin", "latin-ext"],
@@ -25,7 +26,7 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Ketenci Metal | Çelik Konstrüksiyon ve Metal İmalat – Bağcılar, İstanbul",
+    default: "Ketenci Metal | Çelik Konstrüksiyon, Demir Doğrama – Bağcılar, İstanbul",
     template: "%s | Ketenci Metal",
   },
   description: site.description,
@@ -45,7 +46,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "tr_TR",
     siteName: site.name,
-    title: "Ketenci Metal | Metal İşlemede Güç, Tasarımda Mükemmellik",
+    url: "/",
+    title: "Ketenci Metal | Çelik Konstrüksiyon, Demir Doğrama – Bağcılar, İstanbul",
     description: site.description,
     images: [{ url: "/img/og.jpg", width: 1200, height: 630, alt: "Ketenci Metal çelik konstrüksiyon" }],
   },
@@ -60,32 +62,59 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
+// Google için yapılandırılmış veri (yalnızca sitede yer alan doğrulanmış bilgiler)
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
-  name: site.legalName,
-  alternateName: site.name,
-  url: site.url,
-  image: `${site.url}/img/og.jpg`,
-  telephone: site.phoneE164,
-  email: site.email,
-  foundingDate: String(site.foundedYear),
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: site.address.street,
-    addressLocality: site.address.district,
-    addressRegion: site.address.city,
-    addressCountry: site.address.country,
-  },
-  openingHoursSpecification: [
+  "@graph": [
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      opens: site.hours.open,
-      closes: site.hours.close,
+      "@type": "HomeAndConstructionBusiness",
+      "@id": `${site.url}/#isletme`,
+      name: site.legalName,
+      alternateName: site.name,
+      description: site.description,
+      url: `${site.url}/`,
+      image: `${site.url}/img/og.jpg`,
+      logo: `${site.url}/icon.png`,
+      telephone: site.phoneE164,
+      email: site.email,
+      foundingDate: String(site.foundedYear),
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: site.address.street,
+        addressLocality: site.address.district,
+        addressRegion: site.address.city,
+        addressCountry: site.address.country,
+      },
+      hasMap: mapsLink,
+      areaServed: { "@type": "City", name: "İstanbul" },
+      knowsAbout: services.map((s) => s.title),
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Metal imalat ve montaj hizmetleri",
+        itemListElement: services.map((s) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: s.title, areaServed: "İstanbul" },
+        })),
+      },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          opens: site.hours.open,
+          closes: site.hours.close,
+        },
+      ],
+      sameAs: [site.instagram.url],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#site`,
+      url: `${site.url}/`,
+      name: site.name,
+      inLanguage: "tr-TR",
+      publisher: { "@id": `${site.url}/#isletme` },
     },
   ],
-  sameAs: [site.instagram.url],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

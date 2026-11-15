@@ -28,6 +28,7 @@ export default function About() {
           </Reveal>
           <Reveal delay={0.1} className="mt-8 max-w-2xl space-y-5 text-[1.06rem] leading-relaxed text-steel-ink">
             <p>
+              {site.foundedYear}&apos;den bu yana İstanbul {site.address.district}&apos;da metal işçiliği yapıyoruz;
               Mart {site.incorporatedYear}&apos;den bu yana{" "}
               <strong className="font-semibold text-ink">{site.legalName}</strong> olarak çalışıyoruz. Ana işimiz
               çelik yapılar ve çelik konstrüksiyon; bunun yanında demir doğrama, ferforje ile cafe ve mağaza metal

@@ -83,9 +83,22 @@ Kullanıcı bunu birkaç tur ayarladı; değiştirmeden önce sor.
   WhatsApp kutusu, footer'daki kayan hizmet şeridi.
 - Uzun ve geniş kaynak izi, erime efekti.
 
+## Yayın (GitHub Pages)
+- Canlı site: https://www.ketencimetal.com — GitHub deposu `ketencimetal-bot/Site`.
+- `main` dalı = derlenmiş site (`out/` içeriği) + `CNAME` (www.ketencimetal.com) + `.nojekyll`.
+  `.nojekyll` olmadan Pages `_next` klasörünü yok sayar; `CNAME` silinmemeli.
+- `kaynak-kod` dalı = bu kaynak kod. **Asla `main`e birleştirme** (canlı site bozulur).
+- Güncelleme: `npm run build` → `out/` içeriğini `main`e koy (CNAME ve .nojekyll korunur) → push.
+
+## SEO
+- Tek H1: hero'daki küçük üst etiket ("Bağcılar / İstanbul · Çelik konstrüksiyon, demir doğrama ve ferforje").
+  Büyük slogan görsel başlıktır (`<p>`). H1'i slogana geri taşıma.
+- JSON-LD (`layout.tsx`): HomeAndConstructionBusiness + WebSite; hizmetler `services.ts`'den gelir.
+
 ## Açık işler
 - Formlar henüz bir e-posta servisine bağlı değil (Formspree vb. — kullanıcı kararı bekliyor).
-- Site yayına alınmadı. Hosting türü bilinmiyor; HTTPS yönlendirmesi `.htaccess`'te kapalı.
+- Hizmet başına ayrı SEO sayfaları önerildi; kullanıcı şimdilik yalnızca teknik SEO düzeltmelerini seçti.
+- Google Search Console doğrulaması ve Google İşletme Profili kullanıcının hesabıyla yapılacak.
 - Gerçek iPhone/Safari'de test edilmedi (Chrome mobil taklidiyle test edildi).
 
 ## Doğrulama

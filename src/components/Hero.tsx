@@ -26,7 +26,7 @@ export default function Hero() {
           src="/img/konstruksiyon-xl.webp"
           srcSet="/img/konstruksiyon-s.webp 640w, /img/konstruksiyon.webp 1280w, /img/konstruksiyon-xl.webp 1400w"
           sizes="100vw"
-          alt=""
+          alt="Ketenci Metal'in kurduğu çelik taşıyıcı konstrüksiyon"
           fetchPriority="high"
           decoding="async"
           className="animate-kenburns size-full object-cover object-[70%_50%] saturate-[0.85]"
@@ -39,12 +39,15 @@ export default function Hero() {
       <Sparks anchor={{ x: 0.8, y: 0.66 }} />
 
       <div className="container-x relative z-[3] flex flex-1 flex-col justify-center pb-16 pt-32 sm:pt-40">
-        <p className="eyebrow fade-up flex items-center gap-3 text-white/75" style={{ animationDelay: "0.1s" }}>
-          <span className="h-px w-10 bg-copper-hot" aria-hidden />
-          {site.foundedYear}&apos;den beri · {site.address.district} / {site.address.city}
-        </p>
+        {/* SEO: sayfanın ana başlığı (H1) firmanın ne yaptığını ve nerede olduğunu söyler; slogan görsel başlıktır */}
+        <h1 id="hero-baslik" className="eyebrow fade-up flex items-start gap-3 text-white/80" style={{ animationDelay: "0.1s" }}>
+          <span className="mt-[0.55em] h-px w-10 shrink-0 bg-copper-hot" aria-hidden />
+          <span>
+            {site.address.district} / {site.address.city} · Çelik konstrüksiyon, demir doğrama ve ferforje
+          </span>
+        </h1>
 
-        <h1 id="hero-baslik" className="font-display mt-6 max-w-[16ch] text-[clamp(3.1rem,min(7vw,11.5svh),7.6rem)]">
+        <p className="font-display mt-6 max-w-[16ch] text-[clamp(3.1rem,min(7vw,11.5svh),7.6rem)]">
           {lines.map((l, i) => (
             <span key={l} className="line-mask">
               <span
@@ -55,7 +58,7 @@ export default function Hero() {
               </span>
             </span>
           ))}
-        </h1>
+        </p>
 
         <p
           className="fade-up mt-7 max-w-xl text-[1.05rem] leading-relaxed text-white/90 sm:text-lg"
