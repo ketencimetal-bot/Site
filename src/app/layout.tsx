@@ -52,6 +52,8 @@ export const metadata: Metadata = {
     images: [{ url: "/img/og.jpg", width: 1200, height: 630, alt: "Ketenci Metal çelik konstrüksiyon" }],
   },
   twitter: { card: "summary_large_image" },
+  // Google Search Console sahiplik doğrulaması (silinirse doğrulama düşer)
+  verification: { google: "oOVY88zao9ADUUlLq11qKgmG3e-ZImw0CZJqfnC2UsQ" },
   formatDetection: { telephone: false },
 };
 
